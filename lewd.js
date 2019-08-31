@@ -34,9 +34,25 @@ function(err, data) {
 });
 
 document.addEventListener('keydown', logKey);
+document.addEventListener("click", nextImage);
+
+function nextImage(e) {
+	var picker = document.querySelector(".picker");
+	var value = picker.options[picker.selectedIndex].value;
+	
+	getJSON('https://nekos.life/api/v2/img/' + value,
+	function(err, data) {
+		if (err == null) {
+				var img = document.querySelector('.img');
+				console.log(img)
+				img.src = data.url;
+				document.body.appendChild(img);
+				console.log(data.url)
+		}
+	});
+}
 
 function logKey(e) {
-
 	var picker = document.querySelector(".picker");
 	var value = picker.options[picker.selectedIndex].value;
 
