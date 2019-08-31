@@ -37,6 +37,11 @@ document.addEventListener('keydown', logKey);
 document.addEventListener("click", nextImage);
 
 function nextImage(e) {
+
+	if(e.target.id == "pick") {
+		e.returnValue = false;
+		return;
+	}
 	var picker = document.querySelector(".picker");
 	var value = picker.options[picker.selectedIndex].value;
 	
