@@ -22,26 +22,12 @@ function(err, data) {
 		var test = sub.split(',')
 		
 		var x = document.querySelector(".picker");
-		test.forEach(function(element){
-			var option = document.createElement("option");
-			option.text = element.replace("'", "").replace("'", "");
-			x.add(option);
-		})
-	}
-});
-
-getJSON('https://nekos.life/api/v2/endpoints',
-function(err, data) {
-	if (err == null) {
-		var content = data[11]
-		var index = content.indexOf("<") + 1
-		var sub = content.substring(index).replace(">", "")
-		var test = sub.split(',')
 		
-		var x = document.querySelector(".picker");
 		test.forEach(function(element){
+		
 			var option = document.createElement("option");
 			option.text = element.replace("'", "").replace("'", "");
+			
 			x.add(option);
 		})
 	}
