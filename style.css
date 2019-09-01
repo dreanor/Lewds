@@ -3,3 +3,14 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
+body{
+  background-color: #212529;
+  color: white;
+  font-weight: bold;
+}
+select{
+  background-color: #212529;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 15;
+}
