@@ -2,6 +2,7 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 50px;
 }
 body{
   background-color: #212529;
@@ -12,5 +13,7 @@ select{
   background-color: #212529;
   color: white;
   font-weight: bold;
-  margin-bottom: 15;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
