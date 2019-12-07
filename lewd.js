@@ -1,3 +1,7 @@
+var baseSearchUrl = 'https://trace.moe/?url=';
+var nekoImageEndpoint = 'https://nekos.life/api/v2/img/';
+var nekoEndpoints = 'https://nekos.life/api/v2/endpoints';
+
 var getJSON = function(url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
@@ -14,7 +18,7 @@ var getJSON = function(url, callback) {
   xhr.send();
 };
 
-getJSON('https://nekos.life/api/v2/endpoints',
+getJSON(nekoEndpoints,
 function(err, data) {
   if (err == null) {
     var content = data[11];
@@ -40,22 +44,11 @@ document.addEventListener('keydown', handleKey);
 document.addEventListener("click", nextImage);
 
 function nextImage(e) {
-  if(e.target.id == "pick") {
-    e.returnValue = false;
-    return;
+  if(e.target.id != "pick" && e.target.id != "source") {
+    var picker = document.querySelector(".picker");
+    var value = picker.options[picker.selectedIndex].value;
+    showNextImage(picker, value);
   }
-  
-  var picker = document.querySelector(".picker");
-  var value = picker.options[picker.selectedIndex].value;
-  
-  getJSON('https://nekos.life/api/v2/img/' + value,
-  function(err, data) {
-    if (err == null) {
-      var img = document.querySelector('.img');
-      img.src = data.url;
-      document.body.appendChild(img);
-    }
-  });
 }
 
 function handleKey(e) {
@@ -73,13 +66,18 @@ function handleKey(e) {
   }
 
   if(e.key == "ArrowRight" || e.key == "ArrowLeft" || e.key == "d" || e.key == "D" || e.key == "A" || e.key == "a") {
-    getJSON('https://nekos.life/api/v2/img/' + value,
+    showNextImage(picker, value);
+  }
+}
+
+function showNextImage(picker, value){
+  var link = document.querySelector(".btn");
+  getJSON(nekoImageEndpoint + value,
     function(err, data) {
       if (err == null) {
         var img = document.querySelector('.img');
         img.src = data.url;
-        document.body.appendChild(img);
+		link.href = baseSearchUrl + data.url;
       }
     });
-  }
 }
